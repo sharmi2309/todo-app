@@ -1,0 +1,12 @@
+<h2 class="text-3xl font-bold mb-6 text-center text-white drop-shadow-md">Register</h2>
+<form (ngSubmit)="onSubmit()">
+  <input type="email" placeholder="Email"
+         [(ngModel)]="email" name="email"
+         class="w-full p-3 mb-4 rounded-lg border border-white/40 bg-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-fuchsia-300"/>
+  <input type="password" placeholder="Password"
+         [(ngModel)]="password" name="password"
+         class="w-full p-3 mb-6 rounded-lg border border-white/40 bg-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-fuchsia-300" />
+  <button class="border border-fuchsia-400 text-fuchsia-100 font-semibold w-full p-3 rounded-lg hover:bg-fuchsia-500/20 transition duration-300">
+    Register
+  </button>
+</form>

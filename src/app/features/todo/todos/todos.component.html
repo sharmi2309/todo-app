@@ -1,0 +1,17 @@
+   <div class="p-6 max-w-4xl mx-auto">
+      <h1 class="text-3xl font-bold mb-4 text-center text-purple-700">ToDo Manager</h1>
+
+      <!-- Todo Form -->
+      <app-form
+        [todoToEdit]="selectedTodo"
+        (formSubmit)="onFormSubmit($event)"
+        (formCancel)="onFormCancel()"
+      ></app-form>
+
+      <!-- Todo List -->
+      <app-list
+        [todos]="todos"
+        (editTodo)="onEdit($event)"
+        (deleteTodo)="onDelete($event)"
+      ></app-list>
+    </div>

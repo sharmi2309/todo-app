@@ -1,0 +1,29 @@
+<div class="overflow-x-auto">
+  <table class="w-full border-collapse text-left">
+    <thead>
+      <tr class="bg-purple-100">
+        <th class="p-2 border">ID</th>
+        <th class="p-2 border">Title</th>
+        <th class="p-2 border">Description</th>
+        <th class="p-2 border">Completed</th>
+        <th class="p-2 border">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let todo of todos" class="hover:bg-purple-50">
+        <td class="p-2 border">{{ todo.id }}</td>
+        <td class="p-2 border">{{ todo.title }}</td>
+        <td class="p-2 border">{{ todo.description }}</td>
+        <td class="p-2 border">
+          <span [ngClass]="todo.isCompleted ? 'text-green-600' : 'text-red-500'">
+            {{ todo.isCompleted ? 'Yes' : 'No' }}
+          </span>
+        </td>
+        <td class="p-2 border flex gap-2">
+          <button (click)="editTodo.emit(todo)" class="bg-yellow-400 text-white px-2 rounded hover:bg-yellow-500">Edit</button>
+          <button (click)="deleteTodo.emit(todo.id)" class="bg-red-500 text-white px-2 rounded hover:bg-red-600">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

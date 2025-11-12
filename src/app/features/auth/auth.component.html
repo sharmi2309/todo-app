@@ -1,0 +1,26 @@
+<div class="flex items-center justify-center h-screen bg-gradient-to-br from-fuchsia-500 via-purple-600 to-violet-700">
+  <div class="bg-white/20 backdrop-blur-lg p-8 rounded-2xl shadow-lg w-full max-w-md border border-white/30">
+    <div class="flex justify-center mb-6">
+      <button 
+        (click)="activeTab='login'" 
+        [ngClass]="{'border-b-2 border-white font-bold': activeTab==='login'}" 
+        class="px-4 py-2 text-white">
+        Login
+      </button>
+      <button 
+        (click)="activeTab='register'" 
+        [ngClass]="{'border-b-2 border-white font-bold': activeTab==='register'}" 
+        class="px-4 py-2 text-white">
+        Register
+      </button>
+    </div>
+
+    <ng-container *ngIf="activeTab==='login'">
+      <app-login></app-login>
+    </ng-container>
+
+    <ng-container *ngIf="activeTab==='register'">
+      <app-register></app-register>
+    </ng-container>
+  </div>
+</div>
