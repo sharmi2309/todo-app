@@ -1,16 +1,57 @@
+<div class="mb-6">
+<button
+  class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600"
+  routerLink="/todos"
+>
+← Back
+</button>
+</div>
+<div class="flex items-center justify-center bg-gray-100">
+  <div class="bg-white shadow-lg rounded-2xl p-6 w-full ">
+    <h2 class="text-2xl font-bold mb-4 text-gray-800">Add a Todo</h2>
+    <form class="space-y-4" [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+      <div class="flex flex-col md:flex-row md:space-x-4">
+        <input 
+          type="text" 
+          placeholder="Title" 
+          formControlName="title"
+          class="flex-1 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+        <input 
+          type="text" 
+          placeholder="Description" 
+          formControlName="description"
+          class="flex-1 p-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+      </div>
 
-<form [formGroup]="todoForm" (ngSubmit)="submit()" class="mb-6 p-4 border rounded shadow bg-white">
+      <div class="flex items-center justify-between">
+        <label class="flex items-center space-x-2">
+          <input type="checkbox" class="w-5 h-5 text-purple-500 rounded focus:ring-2 focus:ring-purple-500"  
+          formControlName="is_Completed"/>
+          <span>Completed</span>
+        </label>
+        <div>
+        <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
+          {{ isEditMode ? 'Update' : 'Add' }}
+        </button>
+        <button type="button" *ngIf="isEditMode" (click)="onCancel()"
+          class="ml-2 bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">
+          Cancel
+        </button>
+        </div>
+
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- <form [formGroup]="todoForm" (ngSubmit)="onSubmit()" class="mb-6 p-4 border rounded shadow bg-white">
   <div class="flex flex-col md:flex-row gap-2 mb-2">
     <input type="text" formControlName="title" placeholder="Title" class="p-2 border rounded flex-1"/>
     <input type="text" formControlName="description" placeholder="Description" class="p-2 border rounded flex-1"/>
     <label class="flex items-center gap-1">
-      <input type="checkbox" formControlName="isCompleted" /> Completed
+      <input type="checkbox" formControlName="is_Completed" /> Completed
     </label>
   </div>
-  <button type="submit" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
-    {{ todoToEdit ? 'Update' : 'Add' }}
-  </button>
-  <button type="button" *ngIf="todoToEdit" (click)="cancel()" class="ml-2 bg-gray-400 text-white px-4 py-2 rounded hover:bg-gray-500">
-    Cancel
-  </button>
-</form>
+</form> -->
