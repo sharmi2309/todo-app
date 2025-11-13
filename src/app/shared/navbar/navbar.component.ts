@@ -9,13 +9,20 @@ import { RouterLink,Router } from "@angular/router";
 })
 export class NavbarComponent {
   constructor(private router:Router){}
-  login(){
-     sessionStorage.removeItem('token');
+  username: string = '';
+
+  ngOnInit() {
+    const storedUser = sessionStorage.getItem('username');
+    if (storedUser) {
+      this.username = storedUser;
+    }
+  }
+
+  logout() {
+    sessionStorage.removeItem('token');
     this.router.navigate(['/login'])
   }
-  register(){
-    this.router.navigate(['/register'])
-  }
+
 
 }
   

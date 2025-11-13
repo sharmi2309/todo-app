@@ -10,10 +10,17 @@ import { TodosComponent } from './todos/todos.component';
 
 
 const routes: Routes = [
-  { path: '', component: TodosComponent },      
-  { path: 'create', component: FormComponent }, 
-  { path: 'edit/:id', component: FormComponent }
+  {
+    path: '',
+    component: TodosComponent,
+    children: [
+      { path: '', component: ListComponent },
+      { path: 'create', component: FormComponent },
+      { path: 'edit/:id', component: FormComponent }
+    ]
+  }
 ];
+
 
 @NgModule({
   declarations: [ListComponent,FormComponent,TodosComponent],

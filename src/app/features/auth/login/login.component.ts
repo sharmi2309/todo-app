@@ -17,17 +17,11 @@ export class LoginComponent {
   errorMessage = '';
   constructor(private authService: AuthService, private router: Router,private snackBar: MatSnackBar) {}
   onSubmit(form: NgForm) {
-     if (form.invalid) {
-      this.snackBar.open('Please enter both email and password !!', 'Close', {
-        duration: 4000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top'
-      });
-      return;
-    }
     this.authService.login(this.email, this.password).subscribe({
       next: (res) => {
         this.authService.setToken(res.token);
+        const username = this.email.split('@')[0];
+        sessionStorage.setItem("username",username);
         this.router.navigate(['/todos']);
       },
       error: (err) => {
