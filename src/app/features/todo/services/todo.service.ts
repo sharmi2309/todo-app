@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { ToDo } from '../models/todo';
@@ -32,10 +32,11 @@ export class TodoService {
     return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
-  search(title?: string, isCompleted?: boolean): Observable<ToDo[]> {
-    let params: any = {};
-    if (title) params.title = title;
-    if (isCompleted !== undefined) params.isCompleted = isCompleted;
+  searchTodos(title?: string, isCompleted?: boolean | ''): Observable<ToDo[]> {
+    let params = new HttpParams();
+    if (title) params = params.set('title', title);
+    if (isCompleted !== '') params = params.set('isCompleted', isCompleted!);
+
     return this.http.get<ToDo[]>(`${this.baseUrl}/search`, { params });
   }
 }

@@ -3,6 +3,7 @@ import { ToDo } from '../models/todo';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { TodoService } from '../services/todo.service';
 import { Router } from '@angular/router';
+import { Subject, debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-list',
@@ -12,7 +13,9 @@ import { Router } from '@angular/router';
 })
 export class ListComponent {
 todos: ToDo[] = [];
-
+searchTitle: string = '';
+searchCompleted: boolean | '' = '';
+private searchSubject: Subject<void> = new Subject<void>();
   constructor(
     private todoService: TodoService,
     private snackBar: MatSnackBar,
@@ -21,14 +24,24 @@ todos: ToDo[] = [];
 
   ngOnInit(): void {
     this.loadTodos();
+    this.searchSubject.pipe(debounceTime(300)).subscribe(() => {
+      this.todoService.searchTodos(this.searchTitle, this.searchCompleted).subscribe({
+        next: (res) => (this.todos = res),
+        error: (err) => (this.todos = []), 
+      });
+    });
   }
 
   loadTodos(): void {
     this.todoService.getAll().subscribe({
       next: (res) => (this.todos = res),
     });
+    this.searchTitle = '';
+    this.searchCompleted = ''
   }
-
+   onSearch() {
+    this.searchSubject.next();
+  }
   onDelete(id: number): void {
     this.todoService.delete(id).subscribe({
       next: () => {

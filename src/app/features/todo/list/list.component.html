@@ -1,5 +1,20 @@
 <!-- list.component.html -->
 <div class="p-6 max-w-4xl mx-auto">
+  <div class="flex gap-4 mb-4">
+    <input
+      type="text"
+      placeholder="Search by title"
+      [(ngModel)]="searchTitle"
+      (ngModelChange)="onSearch()" 
+      class="border p-2 rounded w-1/2"
+    />
+    <select [(ngModel)]="searchCompleted" (ngModelChange)="onSearch()"  class="border p-2 rounded">
+      <option value="">All</option>
+      <option [value]="true">Completed</option>
+      <option [value]="false">Not Completed</option>
+    </select>
+   
+  </div>
   <div class="flex justify-end mb-4">
     <button
       class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700"
